@@ -8,7 +8,7 @@
       <div class="card">
         <form action="">
           <div class="input-container">
-            <label for="">Name</label>
+            <label for="">Pseudonyme</label>
             <input
               type="text"
               name="user-name"
@@ -19,13 +19,13 @@
           </div>
 
           <div class="input-container">
-            <label for="">Boy or Girl ?</label>
+            <label for="">Etes-vous une fille ou un garçon ?</label>
 
             <div class="radio-container">
               <label>
                 <input
                   type="radio"
-                  name="test"
+                  name="gender"
                   value="boy"
                   v-model="userGender"
                 />
@@ -35,7 +35,7 @@
               <label>
                 <input
                   type="radio"
-                  name="test"
+                  name="gender"
                   value="girl"
                   v-model="userGender"
                 />
@@ -43,15 +43,15 @@
               </label>
             </div>
           </div>
-          <button
-            type="submit"
-            class="btn"
-            @click="
-              getUsername();
-              getUserGender();
-            "
-          >
-            <router-link to="/home">GO</router-link>
+          <button class="btn">
+            <router-link
+              to="/home"
+              @click="
+                getUsername();
+                getUserGender();
+              "
+              >GO</router-link
+            >
           </button>
         </form>
       </div>
@@ -78,13 +78,17 @@ export default {
     getUsername() {
       this.username = this.usernameInput;
       localStorage.setItem("username", this.username);
-      window.location.reload();
     },
 
     getUserGender() {
       this.gender = this.userGender;
       localStorage.setItem("gender", this.gender);
     },
+  },
+
+  mounted() {
+    this.userGender = "";
+    this.username = "";
   },
 };
 </script>
@@ -108,6 +112,8 @@ export default {
   }
 
   a {
+    display: flex;
+    justify-content: center;
     color: white;
     text-decoration: none;
   }

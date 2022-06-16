@@ -2,7 +2,8 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import ConnectView from "../views/ConnectView.vue";
 import HomeView from "../views/HomeView.vue";
 import LevelsView from "../views/LevelsView.vue";
-import AstrologyView from "../views/levels/AstrologyView.vue";
+import AstronomieView from "../views/levels/AstronomieView.vue";
+import AstronomieQuizView from "../views/levels/Quiz/AstronomieQuizView.vue";
 import CookingView from "../views/levels/CookingView.vue";
 import WebDevView from "../views/levels/WebDevView.vue";
 import PhotographyView from "../views/levels/PhotographyView.vue";
@@ -27,9 +28,14 @@ const routes = [
     component: LevelsView,
   },
   {
-    path: "/levels/astrology",
-    name: "astrology",
-    component: AstrologyView,
+    path: "/levels/astronomie",
+    name: "astronomie",
+    component: AstronomieView,
+  },
+  {
+    path: "/levels/astronomie/quiz",
+    name: "astronomieQuiz",
+    component: AstronomieQuizView,
   },
 
   {

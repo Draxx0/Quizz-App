@@ -5,7 +5,7 @@
       <img src="../../public/img/back.png" alt="" class="back" />
     </router-link>
     <div class="container">
-      <h1 class="levels-title">Levels</h1>
+      <h1 class="levels-title">Niveaux</h1>
 
       <div class="level" v-for="level in levels" :key="level">
         <router-link :to="'/levels/' + level.path">
@@ -27,31 +27,31 @@ export default {
     return {
       levels: [
         {
-          title: "Astrology 🌑",
-          path: "astrology",
+          title: "Astronomie 🌑",
+          path: "astronomie",
         },
         {
-          title: "Cooking 🍳",
+          title: "Cuisine 🍳",
           path: "cooking",
         },
         {
-          title: "Web Development 💻",
+          title: "Développement Web 💻",
           path: "webdevelopment",
         },
         {
-          title: "Photography 📷",
+          title: "Photographie 📷",
           path: "photography",
         },
         {
-          title: "Music 🎼",
+          title: "Musique 🎼",
           path: "music",
         },
         {
-          title: "Animals 🐱",
+          title: "Animaux 🐱",
           path: "animals",
         },
         {
-          title: "Sports 🏅",
+          title: "Sport 🏅",
           path: "sports",
         },
       ],
@@ -63,12 +63,6 @@ export default {
 <style lang="scss">
 @import "../scss/variables.scss";
 #levels {
-  .back {
-    position: absolute;
-    left: 5%;
-    top: 2%;
-    width: 48px;
-  }
   .container {
     display: flex;
     flex-direction: column;

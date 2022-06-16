@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <mobileNav />
-    <router-link to="/">
+    <router-link to="/" @click="clearLocalStorage()">
       <img src="../../public/img/disconnect.png" alt="" class="disconnect" />
     </router-link>
     <div class="account-informations">
@@ -19,60 +19,95 @@
       />
       <h1 class="account-username">{{ username }}</h1>
 
-      <div class="level-title-container">
+      <div v-if="userPoints <= 99" class="level-title-container">
         <img src="../../public/img/crown.png" alt="" />
-        <h2 class="level-title">Master</h2>
+        <h2 class="level-title">Débutant</h2>
       </div>
-    </div>
 
-    <div class="stats-container">
-      <div class="card-stats" v-for="card in cardsStats" :key="card">
-        <!--INSERER ICI VFOR DES CARDS STATS AVEC LEVELS / BADGES ET PTS DYNAMIQUES-->
-        <span class="card-stats-number">{{ card.value }}</span>
-        <span class="card-stats-title">{{ card.title }}</span>
+      <div v-else-if="userPoints <= 199" class="level-title-container">
+        <img src="../../public/img/crown.png" alt="" />
+        <h2 class="level-title">Amateur</h2>
       </div>
-    </div>
 
-    <router-link to="/levels" class="btn gradiant">
-      Start Game
-      <!-- <button class="btn gradiant">Start game</button> -->
-    </router-link>
+      <div v-else-if="userPoints <= 299" class="level-title-container">
+        <img src="../../public/img/crown.png" alt="" />
+        <h2 class="level-title">Pro</h2>
+      </div>
 
-    <div class="friends-list-container">
-      <h2 class="friends-list-title">Friends List</h2>
+      <div v-else-if="userPoints <= 399" class="level-title-container">
+        <img src="../../public/img/coin.png" alt="" />
+        <h2 class="level-title">Expert</h2>
+      </div>
 
-      <div class="friends-row">
-        <!--INSERER ICI VFOR DES FRIENDS-->
-        <div class="friend" v-for="friend in friendsList" :key="friend">
-          <img
-            v-if="friend.gender === 'boy'"
-            src="../../public/img/boy-icon.png"
-            alt=""
-            class="friend-icon"
-          />
-          <img
-            v-else
-            src="../../public/img/girl-icon.png"
-            alt=""
-            class="friend-icon"
-          />
-          <div class="friend-infos">
-            <h3 class="friend-name">{{ friend.name }}</h3>
-            <span>-</span>
-            <h3 class="friend-points">{{ friend.points }}</h3>
+      <div v-else-if="userPoints <= 499" class="level-title-container">
+        <img src="../../public/img/diamond.png" alt="" />
+        <h2 class="level-title">Expert +</h2>
+      </div>
+
+      <div v-else-if="userPoints <= 599" class="level-title-container">
+        <img src="../../public/img/crown.png" alt="" />
+        <h2 class="level-title">Maître</h2>
+      </div>
+
+      <div v-else-if="userPoints <= 699" class="level-title-container">
+        <img src="../../public/img/crown.png" alt="" />
+        <h2 class="level-title">Dieu</h2>
+      </div>
+
+      <div v-else class="level-title-container">
+        <img src="../../public/img/crown.png" alt="" />
+        <h2 class="level-title">Légende</h2>
+      </div>
+
+      <div class="stats-container">
+        <div class="card-stats" v-for="card in cardsStats" :key="card">
+          <!--INSERER ICI VFOR DES CARDS STATS AVEC LEVELS / BADGES ET PTS DYNAMIQUES-->
+          <span class="card-stats-number">{{ card.value }}</span>
+          <span class="card-stats-title">{{ card.title }}</span>
+        </div>
+      </div>
+
+      <router-link to="/levels" class="btn gradiant">
+        Lancer un quizz
+        <!-- <button class="btn gradiant">Start game</button> -->
+      </router-link>
+
+      <div class="friends-list-container">
+        <h2 class="friends-list-title">Liste d'amis</h2>
+
+        <div class="friends-row">
+          <!--INSERER ICI VFOR DES FRIENDS-->
+          <div class="friend" v-for="friend in friendsList" :key="friend">
             <img
-              v-if="friend.levelTitle === 'master'"
-              src="../../public/img/crown.png"
+              v-if="friend.gender === 'boy'"
+              src="../../public/img/boy-icon.png"
               alt=""
-              class="friend-level-icon"
+              class="friend-icon"
             />
             <img
-              v-else-if="friend.levelTitle === 'expert+'"
-              src="../../public/img/diamond.png"
+              v-else
+              src="../../public/img/girl-icon.png"
               alt=""
-              class="friend-level-icon"
+              class="friend-icon"
             />
-            <img v-else src="../../public/img/coin.png" alt="" />
+            <div class="friend-infos">
+              <h3 class="friend-name">{{ friend.name }}</h3>
+              <span>-</span>
+              <h3 class="friend-points">{{ friend.points }}</h3>
+              <img
+                v-if="friend.levelTitle === 'master'"
+                src="../../public/img/crown.png"
+                alt=""
+                class="friend-level-icon"
+              />
+              <img
+                v-else-if="friend.levelTitle === 'expert+'"
+                src="../../public/img/diamond.png"
+                alt=""
+                class="friend-level-icon"
+              />
+              <img v-else src="../../public/img/coin.png" alt="" />
+            </div>
           </div>
         </div>
       </div>
@@ -91,10 +126,11 @@ export default {
     return {
       username: "",
       gender: "",
+      userPoints: 0,
       cardsStats: [
         {
           value: 1,
-          title: "Level",
+          title: "Niveau",
         },
         {
           value: 0,
@@ -144,9 +180,17 @@ export default {
     };
   },
 
+  methods: {
+    clearLocalStorage() {
+      localStorage.removeItem("username", "gender");
+    },
+  },
+
   mounted() {
     this.username = localStorage.getItem("username");
     this.gender = localStorage.getItem("gender");
+    this.userPoints = this.cardsStats[1].value;
+    console.log(localStorage);
   },
 };
 </script>

@@ -38,6 +38,10 @@ p {
   margin: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 ul {
   list-style: none;
   padding: 0;
@@ -57,6 +61,22 @@ ul {
 
 .gradiant {
   background: linear-gradient(90.65deg, #8900ff 0.3%, #f762b9 99.45%);
+}
+
+.back {
+  position: absolute;
+  z-index: 2;
+  left: 5%;
+  top: 5%;
+  width: 48px;
+}
+
+.back-arrow {
+  position: absolute;
+  z-index: 2;
+  left: 5%;
+  top: 5%;
+  width: 24px;
 }
 
 /* width */
